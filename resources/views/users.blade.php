@@ -29,7 +29,7 @@ No Image
 </td>
     </tr>
     <td>
-    <a href="/users/{{ $user->id }}/edit">
+    <a href="{{ route('users.edit', $user) }}">
         Edit
     </a>
 </td>

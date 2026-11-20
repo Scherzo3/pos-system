@@ -7,11 +7,12 @@
 
 <h1>Edit User</h1>
 
-<form action="/users/{{ $user->id }}/update"
+<form action="{{ route('users.update', $user) }}"
       method="POST"
       enctype="multipart/form-data">
 
     @csrf
+    @method('PUT')
 
     <label>Username</label><br>
     <input

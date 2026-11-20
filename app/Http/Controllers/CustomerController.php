@@ -33,21 +33,17 @@ public function store(Request $request)
 
     return redirect('/customers');
 }
-public function edit($id)
+public function edit(Customer $customer)
 {
-    $customer = Customer::findOrFail($id);
-
     return view('customers.edit', compact('customer'));
 }
-public function update(Request $request, $id)
+public function update(Request $request, Customer $customer)
 {
     $request->validate([
         'full_name' => 'required',
         'email' => 'required|email',
         'phone' => 'required'
     ]);
-
-    $customer = Customer::findOrFail($id);
 
     $customer->update([
         'full_name' => $request->full_name,

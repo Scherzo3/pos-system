@@ -13,7 +13,7 @@
         <td>{{ $customer->email }}</td>
         <td>{{ $customer->phone }}</td>
     </tr>
-        <a href="/customers/{{ $customer->id }}/edit">
+        <a href="{{ route('customers.edit', $customer) }}">
         Edit
     </a>
     <th>Action</th>

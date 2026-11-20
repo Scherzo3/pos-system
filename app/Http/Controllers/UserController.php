@@ -31,13 +31,11 @@ public function store(Request $request)
 
     return redirect('/users');
 }
-public function edit($id)
+public function edit(UserAccount $user)
 {
-    $user = UserAccount::findOrFail($id);
-
     return view('users.edit', compact('user'));
 }
-public function update(Request $request, $id)
+public function update(Request $request, UserAccount $user)
 {
     $request->validate([
         'username' => 'required',
@@ -45,7 +43,6 @@ public function update(Request $request, $id)
         'avatar' => 'nullable|image|max:2048'
     ]);
 
-    $user = UserAccount::findOrFail($id);
 
     $user->username = $request->username;
     $user->full_name = $request->full_name;

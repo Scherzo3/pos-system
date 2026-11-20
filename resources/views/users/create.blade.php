@@ -7,7 +7,8 @@
 
 <h1>Create User</h1>
 
-<form action="/users/store" method="POST">
+<form action="{{ route('users.store') }}"
+      method="POST">
 
     @csrf
 
