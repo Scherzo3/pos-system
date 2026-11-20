@@ -13,5 +13,13 @@
         <td>{{ $customer->email }}</td>
         <td>{{ $customer->phone }}</td>
     </tr>
+        <a href="/customers/{{ $customer->id }}/edit">
+        Edit
+    </a>
+    <th>Action</th>
     @endforeach
+    <td>
+
+</td>
+    
 </table>
