@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2026 at 06:34 PM
+-- Generation Time: Nov 20, 2026 at 07:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,12 +69,7 @@ INSERT INTO `customers` (`id`, `full_name`, `email`, `phone`, `created_at`, `upd
 (2, 'Maria Santos', 'maria@gmail.com', '09111111111', NULL, NULL),
 (3, 'Pedro Reyes', 'pedro@gmail.com', '09222222222', NULL, NULL),
 (4, 'Anna Cruz', 'anna@gmail.com', '09333333333', NULL, NULL),
-(5, 'Mark Lopez', 'mark@gmail.com', '09444444444', NULL, NULL),
-(6, 'Juan Dela Cruz', 'juan@gmail.com', '09123456789', NULL, NULL),
-(7, 'Maria Santos', 'maria@gmail.com', '09111111111', NULL, NULL),
-(8, 'Pedro Reyes', 'pedro@gmail.com', '09222222222', NULL, NULL),
-(9, 'Anna Cruz', 'anna@gmail.com', '09333333333', NULL, NULL),
-(10, 'Mark Lopez', 'mark@gmail.com', '09444444444', NULL, NULL);
+(5, 'Mark Lopez', 'mark@gmail.com', '09444444444', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,7 +143,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
 (4, '2026_10_24_161346_create_customers_table', 1),
-(5, '2026_10_24_161352_create_user_accounts_table', 1);
+(5, '2026_10_24_161352_create_user_accounts_table', 1),
+(6, '2026_11_20_062007_add_avatar_to_user_accounts_table', 1);
 
 -- --------------------------------------------------------
 
@@ -182,7 +178,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('RcZADceP1WgliLNUNjhDZes6DbXFz0qPs9D6dhgm', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaVVpeTVkZVVIZHFZN001N2R5RzJMT0NLcVlNVDJubDR6UENxMVFncCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jdXN0b21lcnMiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1792859515);
+('Vb7gd0C19YoDPpu6tiAP30y3gH8zIRkVB7fH9NQb', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUzFkMGJQSEtOemZqajlnaUtvcFlJN0VHakFPWmkzc2VkQmVkUG9CdSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VycyI7czo1OiJyb3V0ZSI7Tjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795156286);
 
 -- --------------------------------------------------------
 
@@ -209,9 +205,23 @@ CREATE TABLE `users` (
 
 CREATE TABLE `user_accounts` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_accounts`
+--
+
+INSERT INTO `user_accounts` (`id`, `username`, `full_name`, `created_at`, `updated_at`, `avatar`) VALUES
+(1, 'admin', 'System Administrator', NULL, '2026-11-19 22:30:54', 'avatars/9XgDQ78SITIfMrkovzbPJUYv6Xc6QcSVftpSwvyx.jpg'),
+(2, 'staff1', 'John Ramos', NULL, NULL, NULL),
+(3, 'staff2', 'Jane Cruz', NULL, NULL, NULL),
+(4, 'cashier1', 'Mark Santos', NULL, NULL, NULL),
+(5, 'cashier2', 'Paul Garcia', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -288,7 +298,8 @@ ALTER TABLE `users`
 -- Indexes for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_accounts_username_unique` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -298,7 +309,7 @@ ALTER TABLE `user_accounts`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -316,7 +327,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -328,7 +339,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
